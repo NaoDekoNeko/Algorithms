@@ -1,0 +1,79 @@
+calcModa(freq):
+    si length(freq) <= 1:
+        return freq
+    si length(freq) = 2:
+        return vecModa(moda(freq));
+    sino:
+        m = length(freq) / 2
+        A = calcModa(freq[0:m])
+        B = calcModa(freq[m:length(freq)])
+        resultado = moda(A, B)
+
+        max_freq = 0
+        resultado_final = []
+        
+        para cada elemento p del vector resultado:
+            max_freq = max(max_freq,p.second)
+        fin para
+
+        para cada elemento p del vector resultado:
+            si p.second == max_freq
+                append(resultado_final,p)
+            fin si
+        fin para
+
+        return resultado_final
+    fin si
+
+moda(A)
+    si(A[0].firts = A[1].first):
+        append(resultado,A[0].first,A[0].second+A[1].second)
+        return resultado
+    sino:
+        resultado
+    fin si
+
+moda(A, B):
+    resultado = []
+    i=0,j=0
+
+    mientras i < length(A) y j < length(B):
+        si A[i].first == B[j].first:
+            append(resultado, (A[i].first, A[i].second + B[j].second))
+            i++
+            j++
+        sino si A[i].second > B[j].second:
+            append(resultado,A[i])
+            i++
+        sino si B[j].second > A[i].second:
+            append(resultado,B[j])
+            j++
+        sino
+            i++
+            j++
+    fin mientras
+
+    mientras i < length(A):
+        append(resultado,A[i])
+        i++
+    fin mientras
+
+    mientras j < length(B):
+        append(resultado,B[j])
+        j++
+    fin mientras
+
+    return resultado
+
+vecModa(A)
+    para cada elemento p de A:
+        max_freq = max(max_freq,p.second)
+    fin para
+
+    para cada elemento p de A:
+        si p.second = max_freq:
+            append(resultado,p)
+        fin si
+    fin para
+
+    return resultado

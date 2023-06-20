@@ -1,0 +1,24 @@
+Función HeldKarp(grafo):
+    N = número de nodos en el grafo
+    Crear una tabla de tamaño N x 2^(N-1) para guardar las soluciones a los subproblemas
+
+    Para cada nodo k en el grafo:
+        Guardar el costo de ir del nodo inicial al nodo k en la tabla
+
+    Para s = 2 hasta N-1:
+        Para cada subconjunto S de tamaño s que contiene el nodo inicial:
+            Para cada nodo k en S y k != nodo inicial:
+                Inicializar el costo mínimo con un valor alto
+                Para cada nodo m en S y m != k:
+                    Calcular el costo de visitar el nodo k después del nodo m
+                    Si el costo es menor que el costo mínimo:
+                        Actualizar el costo mínimo
+                Guardar el costo mínimo en la tabla
+
+    Inicializar el costo mínimo con un valor alto
+    Para cada nodo k en el grafo y k != nodo inicial:
+        Calcular el costo de visitar el nodo inicial después del nodo k
+        Si el costo es menor que el costo mínimo:
+            Actualizar el costo mínimo
+
+    Retornar el costo mínimo

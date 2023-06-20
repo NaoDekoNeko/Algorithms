@@ -1,0 +1,16 @@
+Función TSP(G, n):
+    Para k de 2 hasta n:
+        g({k}, k) := d(1, k)
+    Fin Para
+
+    Para s de 2 hasta n-1:
+        Para todo S ⊆ {2, ..., n}, |S| = s:
+            Para todo k ∈ S:
+                g(S, k) := minm≠k,m∈S [g(S\{k}, m) + d(m, k)]
+            Fin Para
+        Fin Para
+    Fin Para
+
+    opt := mink≠1 [g({2, 3, ..., n}, k) + d(k, 1)]
+    Retornar (opt)
+Fin Función
