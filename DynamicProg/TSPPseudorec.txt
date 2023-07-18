@@ -1,0 +1,35 @@
+Función TSP(grafo, lookup, pos, visitados)
+    N = longitud(grafo)
+
+    // Si todos los nodos han sido visitados
+    Si visitados == ((1 << N) - 1)
+        Retornar grafo[pos][0] // Regresar al nodo inicial
+
+    // Crear una clave para el mapa
+    clave = (pos, visitados)
+
+    // Si el subproblema ya fue resuelto
+    Si clave está en lookup
+        Retornar lookup[clave].first
+
+    // Inicializar el costo mínimo con un valor alto
+    minimo = infinito
+    siguiente = -1
+
+    // Recorrer todos los nodos
+    Para k en el rango de 0 a N
+        // Si el nodo no ha sido visitado
+        Si !(visitados & (1 << k))
+            // Calcular el costo mínimo de visitar el nodo k
+            costo = grafo[pos][k] + TSP(grafo, lookup, k, visitados | (1 << k))
+
+            // Actualizar el costo mínimo y el siguiente nodo a visitar
+            Si costo < minimo
+                minimo = costo
+                siguiente = k
+
+    // Guardar la solución en el mapa
+    lookup[clave] = (minimo, siguiente)
+
+    // Retornar el costo mínimo
+    Retornar minimo
